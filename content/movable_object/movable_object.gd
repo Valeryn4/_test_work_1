@@ -41,15 +41,16 @@ func set_direction(vec: Vector3) -> void :
 
 func _physics_process(delta: float) -> void:
 	
+	_current_speed = move_toward(_current_speed, speed * _direction.length(), accel * delta)
+	velocity =  _direction * _current_speed
 	if enable_world_gravity :
 		var state := PhysicsServer.body_get_direct_state(get_rid())
 		if is_on_floor() :
 			_current_gravity = Vector3.ZERO
 		else :
 			_current_gravity += state.total_gravity
+		velocity += _current_gravity
 	
-	_current_speed = move_toward(_current_speed, speed * _direction.length(), accel * delta)
-	velocity =  _direction * _current_speed
 	
-	move_and_slide(velocity, up)
+	velocity = move_and_slide(velocity, up)
 	emit_signal("change_speed", velocity.z)
