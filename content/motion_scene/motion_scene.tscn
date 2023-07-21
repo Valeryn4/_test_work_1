@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://content/movable_object/movable_object.gd" type="Script" id=1]
+[ext_resource path="res://content/controller/controller.gd" type="Script" id=2]
+[ext_resource path="res://content/models/cube/cube.tscn" type="PackedScene" id=3]
+[ext_resource path="res://content/motion_scene/motion_scene.gd" type="Script" id=4]
+[ext_resource path="res://content/world/world.tscn" type="PackedScene" id=5]
+[ext_resource path="res://content/gui/gui.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_color = Color( 0.254902, 0.435294, 0.447059, 1 )
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.68
+
+[node name="MotionScene" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="ENV" type="Spatial" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="ENV"]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="ENV"]
+transform = Transform( 0.561231, 0.630022, -0.536741, 0, 0.648505, 0.76121, 0.827659, -0.427215, 0.363962, 0, 11.471, 0 )
+
+[node name="World" parent="." instance=ExtResource( 5 )]
+
+[node name="MovableObject" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0632447, 0 )
+collision_layer = 2
+script = ExtResource( 1 )
+model = ExtResource( 3 )
+
+[node name="Controller" type="Node" parent="MovableObject"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="MovableObject"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="SpringArm" type="SpringArm" parent="MovableObject"]
+transform = Transform( -1, 8.9407e-08, -8.9407e-08, 0, 0.723678, 0.690138, 1.19209e-07, 0.690138, -0.723678, 0, 0.385122, 0 )
+spring_length = 5.0
+
+[node name="CameraTarget" type="Camera" parent="MovableObject/SpringArm"]
+unique_name_in_owner = true
+transform = Transform( 1, 2.98023e-08, -1.49012e-08, -2.98023e-08, 1, 0, 1.49012e-08, 0, 1, -7.51168e-08, 1.78814e-07, 4.69904 )
+current = true
+
+[node name="CameraGlobal" type="Camera" parent="."]
+unique_name_in_owner = true
+transform = Transform( 0.710087, 0.614535, -0.343691, 0, 0.488119, 0.872777, 0.704114, -0.619748, 0.346607, -4.31953, 10.3974, 3.34971 )
+
+[node name="GUI" parent="." instance=ExtResource( 6 )]
+
+[connection signal="change_speed" from="MovableObject" to="." method="_on_MovableObject_change_speed"]
+[connection signal="change_direction" from="MovableObject/Controller" to="." method="_on_Controller_change_direction"]
+[connection signal="change_direction" from="MovableObject/Controller" to="MovableObject" method="_on_change_direction"]
+[connection signal="button_global_pressed" from="GUI" to="." method="_on_GUI_button_global_pressed"]
+[connection signal="button_target_pressed" from="GUI" to="." method="_on_GUI_button_target_pressed"]
+[connection signal="change_slider" from="GUI" to="." method="_on_GUI_change_slider"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/prototype_textures/Orange/texture_04.png" type="Texture" id=1]
+[ext_resource path="res://resources/prototype_textures/Dark/texture_03.png" type="Texture" id=2]
+[ext_resource path="res://resources/prototype_textures/Green/texture_04.png" type="Texture" id=3]
+[ext_resource path="res://resources/prototype_textures/Red/texture_10.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 3 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 4 )
+uv1_triplanar = true
+
+[node name="World" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11467, 0, 0 )
+use_collision = true
+collision_mask = 0
+width = 0.365261
+height = 0.263857
+depth = 129.588
+material = SubResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02477, 0, 0 )
+use_collision = true
+collision_mask = 0
+width = 0.365261
+height = 0.263857
+depth = 129.588
+material = SubResource( 1 )
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04652, 0 )
+use_collision = true
+collision_mask = 0
+width = 129.083
+depth = 130.824
+material = SubResource( 2 )
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.161883, 0 )
+use_collision = true
+collision_mask = 0
+height = 0.430218
+depth = 129.772
+material = SubResource( 3 )
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64.4626 )
+use_collision = true
+collision_mask = 0
+width = 4.0185
+material = SubResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64.949 )
+use_collision = true
+collision_mask = 0
+width = 4.61933
+material = SubResource( 4 )

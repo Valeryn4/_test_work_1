@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://content/gui/gui.gd" type="Script" id=1]
+
+[sub_resource type="ButtonGroup" id=3]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Buttons" type="ColorRect" parent="."]
+margin_right = 230.0
+margin_bottom = 66.0
+color = Color( 0, 0, 0, 0.427451 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 12.0
+margin_right = -2.0
+margin_bottom = -12.0
+alignment = 1
+
+[node name="ButtonCameraTarget" type="Button" parent="Buttons/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 7.0
+margin_right = 110.0
+margin_bottom = 42.0
+toggle_mode = true
+pressed = true
+group = SubResource( 3 )
+text = "Camera Target"
+
+[node name="ButtonCameraGlobal" type="Button" parent="Buttons/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 114.0
+margin_right = 219.0
+margin_bottom = 42.0
+toggle_mode = true
+group = SubResource( 3 )
+text = "Camera Global"
+
+[node name="SpeedSlider" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -34.0
+margin_top = -178.0
+margin_bottom = 178.0
+color = Color( 0, 0, 0, 0.415686 )
+
+[node name="VSliderSpeed" type="VSlider" parent="SpeedSlider"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+margin_bottom = -20.0
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -122.0
+margin_bottom = 46.0
+color = Color( 0, 0, 0, 0.329412 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer2"]
+margin_top = 16.0
+margin_right = 47.0
+margin_bottom = 30.0
+text = "Speed :"
+
+[node name="LabelSpeed" type="Label" parent="ColorRect/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 51.0
+margin_top = 16.0
+margin_right = 71.0
+margin_bottom = 30.0
+text = "0.0"
+
+[node name="HELP" type="ColorRect" parent="."]
+margin_top = 66.0
+margin_right = 253.0
+margin_bottom = 125.0
+color = Color( 0.239216, 0.0196078, 0.0196078, 0.682353 )
+
+[node name="Label" type="Label" parent="HELP"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 4.0
+text = "HELP:
+Press button [1-4]
+Rolle mouse wheel forward-backward"
+
+[connection signal="pressed" from="Buttons/HBoxContainer/ButtonCameraTarget" to="." method="_on_ButtonCameraTarget_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/ButtonCameraGlobal" to="." method="_on_ButtonCameraGlobal_pressed"]
+[connection signal="drag_ended" from="SpeedSlider/VSliderSpeed" to="." method="_on_VSliderSpeed_drag_ended"]
