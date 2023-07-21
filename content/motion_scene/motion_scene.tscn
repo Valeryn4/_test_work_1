@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://content/movable_object/movable_object.gd" type="Script" id=1]
 [ext_resource path="res://content/controller/controller.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://content/motion_scene/motion_scene.gd" type="Script" id=4]
 [ext_resource path="res://content/world/world.tscn" type="PackedScene" id=5]
 [ext_resource path="res://content/gui/gui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://content/motion_scene/move_to_target.gd" type="Script" id=7]
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
@@ -49,7 +50,13 @@ unique_name_in_owner = true
 transform = Transform( 1, 2.98023e-08, -1.49012e-08, -2.98023e-08, 1, 0, 1.49012e-08, 0, 1, -7.51168e-08, 1.78814e-07, 4.69904 )
 current = true
 
-[node name="CameraGlobal" type="Camera" parent="."]
+[node name="MoveToTarget" type="Spatial" parent="."]
+script = ExtResource( 7 )
+target_distance = 50.0
+target_path = NodePath("../MovableObject")
+speed = 60.0
+
+[node name="CameraGlobal" type="Camera" parent="MoveToTarget"]
 unique_name_in_owner = true
 transform = Transform( 0.710087, 0.614535, -0.343691, 0, 0.488119, 0.872777, 0.704114, -0.619748, 0.346607, -4.31953, 10.3974, 3.34971 )
 

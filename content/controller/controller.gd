@@ -39,7 +39,6 @@ func set_direction(val: Vector3) :
 
 
 func _input(event: InputEvent) -> void:
-#	print(event)
 	if event is InputEventMouseButton :
 		if event.is_pressed() :
 			if event.button_index == BUTTON_WHEEL_UP:
