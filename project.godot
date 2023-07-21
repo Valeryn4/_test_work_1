@@ -32,7 +32,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="TestWork"
+config/name="Quest 1"
+run/main_scene="res://content/motion_scene/motion_scene.tscn"
 config/icon="res://icon.png"
 
 [gui]
